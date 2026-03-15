@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customer Detail | Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand-block">
+          <h1>Intelligence</h1>
+          <p>CROSS-SELL PLATFORM</p>
+        </div>
+        <nav class="side-nav">
+          <p class="nav-label">AGENT TOOLS</p>
+          <a href="/">Dashboard</a>
+          <a class="active" href="/customers">Customers</a>
+          <a href="/scanners">Scanners</a>
+          <a href="/nudge-campaigns">Nudge Campaigns</a>
+        </nav>
+      </aside>
+
+      <main class="main-panel">
+        <section class="detail-header">
+          <a class="back-link" href="/customers">Back to Customers</a>
+          <h2 id="customerName">Loading customer...</h2>
+          <p id="customerSub">Fetching full profile from demo data source</p>
+        </section>
+
+        <section class="detail-grid">
+          <article class="detail-card">
+            <h3>Customer Profile</h3>
+            <div class="key-grid" id="profileGrid"></div>
+          </article>
+
+          <article class="detail-card intelligence-card">
+            <h3>Intelligence Engine Output</h3>
+            <div class="intelligence-summary" id="intelligenceSummary"></div>
+            <div class="product-columns">
+              <div>
+                <h4>Cross-Sell Products</h4>
+                <ul id="crossSellList" class="pill-list"></ul>
+              </div>
+              <div>
+                <h4>Up-Sell Products</h4>
+                <ul id="upSellList" class="pill-list"></ul>
+              </div>
+            </div>
+            <div>
+              <h4>Why these recommendations</h4>
+              <ul id="reasonsList" class="reason-list"></ul>
+            </div>
+          </article>
+        </section>
+
+        <section class="detail-grid split-bottom">
+          <article class="detail-card">
+            <h3>Policies</h3>
+            <div id="policiesContainer" class="stacked-cards"></div>
+          </article>
+
+          <article class="detail-card">
+            <h3>Claims</h3>
+            <div id="claimsContainer" class="stacked-cards"></div>
+          </article>
+        </section>
+
+        <!-- AI Recommendation Section -->
+        <section class="ai-rec-section" id="aiRecSection">
+          <div class="ai-rec-header">
+            <h3>🤖 AI-Powered Deep Recommendation</h3>
+            <button class="nudge-btn nudge-btn-accent" id="btn-get-ai-rec">
+              <span class="nudge-btn-icon">✨</span> Generate AI Insights
+            </button>
+          </div>
+
+          <div class="ai-rec-placeholder" id="aiRecPlaceholder">
+            <div class="nudge-ai-placeholder-icon">🧠</div>
+            <p>Click <strong>"Generate AI Insights"</strong> to get
+              Gemini-powered behavioral analysis, risk assessment, and
+              personalized product recommendations for this customer.</p>
+          </div>
+
+          <div class="ai-rec-loading hidden" id="aiRecLoading">
+            <div class="nudge-ai-spinner"></div>
+            <p>Gemini is analyzing this customer's profile...</p>
+          </div>
+
+          <div class="ai-rec-results hidden" id="aiRecResults">
+            <div class="ai-rec-grid">
+              <article class="detail-card ai-rec-card">
+                <h4>🔍 Behavioral Insights</h4>
+                <ul id="aiInsightsList" class="reason-list"></ul>
+              </article>
+
+              <article class="detail-card ai-rec-card">
+                <h4>⚠️ Risk Analysis</h4>
+                <div id="aiRiskAnalysis"></div>
+              </article>
+            </div>
+
+            <article class="detail-card ai-rec-card ai-rec-pitch">
+              <h4>💬 Personalized Pitch</h4>
+              <blockquote id="aiPitch" class="ai-pitch-quote"></blockquote>
+            </article>
+
+            <div class="ai-rec-grid">
+              <article class="detail-card ai-rec-card">
+                <h4>🎯 AI Product Recommendations</h4>
+                <div id="aiProductsList" class="stacked-cards"></div>
+              </article>
+
+              <article class="detail-card ai-rec-card">
+                <h4>📊 Additional Insights</h4>
+                <div id="aiAdditionalInsights"></div>
+              </article>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/auth.js"></script>
+    <script src="/customer-detail.js"></script>
+  </body>
+</html>

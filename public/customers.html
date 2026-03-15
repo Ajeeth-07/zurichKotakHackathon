@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customers | Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand-block">
+          <h1>Intelligence</h1>
+          <p>CROSS-SELL PLATFORM</p>
+        </div>
+
+        <nav class="side-nav">
+          <p class="nav-label">AGENT TOOLS</p>
+          <a href="/">Dashboard</a>
+          <a class="active" href="/customers">Customers</a>
+          <a href="/scanners">Scanners</a>
+          <a href="/nudge-campaigns">Nudge Campaigns</a>
+        </nav>
+      </aside>
+
+      <main class="main-panel">
+        <section class="hero customers-hero">
+          <h2>Customers</h2>
+          <p>
+            Search and filter customer segments for targeted cross-sell
+            outreach.
+          </p>
+        </section>
+
+        <section class="filter-row">
+          <input
+            id="searchInput"
+            type="text"
+            placeholder="Search by name, email, city or phone"
+          />
+          <select id="riskFilter">
+            <option value="">All Risk Levels</option>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+          </select>
+          <select id="channelFilter">
+            <option value="">All Channels</option>
+            <option value="Email">Email</option>
+            <option value="Phone">Phone</option>
+            <option value="Branch">Branch</option>
+            <option value="App">App</option>
+          </select>
+          <button id="applyFilterBtn" type="button">Apply</button>
+        </section>
+
+        <section class="table-wrap">
+          <div class="table-hint">
+            Click any customer row to open full profile and recommendations.
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Risk</th>
+                <th>Policies</th>
+                <th>Claims</th>
+                <th>Confidence Score</th>
+                <th>Location</th>
+              </tr>
+            </thead>
+            <tbody id="customersBody"></tbody>
+          </table>
+          <div class="table-footer">
+            <span id="tableMeta">Loading customers...</span>
+            <div class="pagination">
+              <button id="prevBtn" type="button">Previous</button>
+              <button id="nextBtn" type="button">Next</button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/auth.js"></script>
+    <script src="/customers.js"></script>
+  </body>
+</html>

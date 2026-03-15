@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nudge Campaigns — Intelligence Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand-block">
+          <h1>Intelligence</h1>
+          <p>CROSS-SELL PLATFORM</p>
+        </div>
+
+        <nav class="side-nav">
+          <p class="nav-label">AGENT TOOLS</p>
+          <a href="/">Dashboard</a>
+          <a href="/customers">Customers</a>
+          <a href="/scanners">Scanners</a>
+          <a class="active" href="/nudge-campaigns">Nudge Campaigns</a>
+
+          <p class="nav-label push-top">CUSTOMER FACING</p>
+          <a href="#">Customer Portal</a>
+        </nav>
+
+        <div class="agent-card">
+          <div class="agent-avatar">AK</div>
+          <div>
+            <h3>Agent Portal</h3>
+            <p>Level 4 Elite</p>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-panel">
+        <!-- Hero -->
+        <section class="hero nudge-hero">
+          <h2>AI Nudge Campaigns</h2>
+          <p>
+            Leverage Gemini AI to craft hyper-personalized cross-sell & upsell
+            SMS campaigns at scale.
+          </p>
+        </section>
+
+        <!-- KPI Metrics -->
+        <section class="metrics-grid nudge-kpi-grid">
+          <article class="metric-card">
+            <h4>Total Customers</h4>
+            <strong id="kpi-total">—</strong>
+          </article>
+          <article class="metric-card">
+            <h4>Filtered Segment</h4>
+            <strong id="kpi-filtered">—</strong>
+          </article>
+          <article class="metric-card">
+            <h4>Avg Cross-Sell Score</h4>
+            <strong id="kpi-cross-sell">—</strong>
+          </article>
+          <article class="metric-card">
+            <h4>Campaigns Sent</h4>
+            <strong id="kpi-campaigns">0</strong>
+          </article>
+        </section>
+
+        <!-- Filter Panel -->
+        <section class="nudge-filter-panel">
+          <div class="nudge-filter-header" id="filter-toggle">
+            <h3>🎯 Segment Filter</h3>
+            <span class="nudge-filter-chevron" id="filter-chevron">▼</span>
+          </div>
+          <div class="nudge-filter-body" id="filter-body">
+            <div class="nudge-filter-grid">
+              <div class="nudge-filter-group">
+                <label for="filter-age-min">Age (Min)</label>
+                <input
+                  type="number"
+                  id="filter-age-min"
+                  placeholder="18"
+                  min="18"
+                  max="80"
+                />
+              </div>
+              <div class="nudge-filter-group">
+                <label for="filter-age-max">Age (Max)</label>
+                <input
+                  type="number"
+                  id="filter-age-max"
+                  placeholder="80"
+                  min="18"
+                  max="80"
+                />
+              </div>
+              <div class="nudge-filter-group">
+                <label for="filter-income-min">Income Min (₹)</label>
+                <input
+                  type="number"
+                  id="filter-income-min"
+                  placeholder="0"
+                  min="0"
+                />
+              </div>
+              <div class="nudge-filter-group">
+                <label for="filter-income-max">Income Max (₹)</label>
+                <input
+                  type="number"
+                  id="filter-income-max"
+                  placeholder="No limit"
+                  min="0"
+                />
+              </div>
+              <div class="nudge-filter-group">
+                <label for="filter-location">Location</label>
+                <select id="filter-location">
+                  <option value="">All Locations</option>
+                </select>
+              </div>
+              <div class="nudge-filter-group">
+                <label for="filter-policy">Policy Type</label>
+                <select id="filter-policy">
+                  <option value="">All Types</option>
+                </select>
+              </div>
+              <div class="nudge-filter-group">
+                <label for="filter-risk">Risk Level</label>
+                <select id="filter-risk">
+                  <option value="">All Levels</option>
+                </select>
+              </div>
+              <div class="nudge-filter-group">
+                <label for="filter-occupation">Occupation</label>
+                <select id="filter-occupation">
+                  <option value="">All Occupations</option>
+                </select>
+              </div>
+              <div class="nudge-filter-group">
+                <label for="filter-gender">Gender</label>
+                <select id="filter-gender">
+                  <option value="">All</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
+              <div class="nudge-filter-group">
+                <label for="filter-marital">Marital Status</label>
+                <select id="filter-marital">
+                  <option value="">All</option>
+                  <option value="Single">Single</option>
+                  <option value="Married">Married</option>
+                </select>
+              </div>
+              <div class="nudge-filter-group">
+                <label for="filter-renewal-after">Renewal After</label>
+                <input type="date" id="filter-renewal-after" />
+              </div>
+              <div class="nudge-filter-group">
+                <label for="filter-renewal-before">Renewal Before</label>
+                <input type="date" id="filter-renewal-before" />
+              </div>
+            </div>
+
+            <!-- Platform Selection -->
+            <div class="nudge-platform-section">
+              <label class="nudge-platform-label">📱 Delivery Platforms</label>
+              <div class="nudge-platform-chips">
+                <label class="nudge-chip-toggle">
+                  <input type="checkbox" id="plat-whatsapp" value="WhatsApp" checked />
+                  <span class="nudge-chip">💬 WhatsApp</span>
+                </label>
+                <label class="nudge-chip-toggle">
+                  <input type="checkbox" id="plat-email" value="Email" checked />
+                  <span class="nudge-chip">📧 Email</span>
+                </label>
+                <label class="nudge-chip-toggle">
+                  <input type="checkbox" id="plat-app" value="App" checked />
+                  <span class="nudge-chip">📲 App</span>
+                </label>
+                <label class="nudge-chip-toggle">
+                  <input type="checkbox" id="plat-web" value="Web" checked />
+                  <span class="nudge-chip">🌐 Web</span>
+                </label>
+              </div>
+            </div>
+            <div class="nudge-filter-actions">
+              <button class="nudge-btn nudge-btn-primary" id="btn-apply-filter">
+                Apply Filters
+              </button>
+              <button class="nudge-btn nudge-btn-ghost" id="btn-clear-filter">
+                Clear All
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Segment Preview Table -->
+        <section class="nudge-segment-section" id="segment-section">
+          <div class="nudge-section-head">
+            <h3>📋 Segment Preview</h3>
+            <span class="nudge-segment-count" id="segment-count"></span>
+          </div>
+          <div class="nudge-location-chips" id="location-chips"></div>
+          <div class="table-wrap">
+            <table id="segment-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Age</th>
+                  <th>Location</th>
+                  <th>Income</th>
+                  <th>Policies</th>
+                  <th>Risk</th>
+                  <th>Cross-Sell</th>
+                  <th>Up-Sell</th>
+                  <th>Suggested Products</th>
+                  <th>Renewal</th>
+                </tr>
+              </thead>
+              <tbody id="segment-tbody">
+                <tr>
+                  <td colspan="9" class="nudge-empty-state">
+                    Apply filters above to preview your target segment
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-footer" id="segment-pagination">
+            <span id="segment-page-info"></span>
+            <div class="pagination">
+              <button id="btn-prev-page" disabled>◀ Prev</button>
+              <button id="btn-next-page" disabled>Next ▶</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- AI Content Studio -->
+        <section class="nudge-ai-section" id="ai-section">
+          <div class="nudge-section-head">
+            <h3>✨ AI Content Studio</h3>
+            <button class="nudge-btn nudge-btn-accent" id="btn-generate-ai">
+              <span class="nudge-btn-icon">🤖</span> Generate with Gemini
+            </button>
+          </div>
+
+          <div class="nudge-ai-placeholder" id="ai-placeholder">
+            <div class="nudge-ai-placeholder-icon">🧠</div>
+            <p>
+              Click <strong>"Generate with Gemini"</strong> to create
+              AI-powered SMS templates for your selected segment.
+            </p>
+          </div>
+
+          <div class="nudge-ai-loading hidden" id="ai-loading">
+            <div class="nudge-ai-spinner"></div>
+            <p>Gemini is crafting personalized content...</p>
+          </div>
+
+          <div class="nudge-ai-results hidden" id="ai-results">
+            <!-- Creative Brief -->
+            <div class="nudge-creative-brief" id="creative-brief"></div>
+
+            <!-- SMS Templates -->
+            <div class="nudge-sms-templates" id="sms-templates"></div>
+
+            <!-- Custom Message -->
+            <div class="nudge-custom-msg">
+              <label for="custom-sms">✏️ Custom / Edit SMS Message</label>
+              <textarea
+                id="custom-sms"
+                rows="3"
+                placeholder="Type your SMS message here... Use {{name}} for personalization"
+              ></textarea>
+            </div>
+
+            <button class="nudge-btn nudge-btn-accent" id="btn-regenerate">
+              🔄 Regenerate Content
+            </button>
+          </div>
+        </section>
+
+        <!-- Bulk Send Panel -->
+        <section class="nudge-send-section" id="send-section">
+          <div class="nudge-section-head">
+            <h3>📤 Send Campaign</h3>
+          </div>
+          <div class="nudge-send-body">
+            <div class="nudge-send-summary" id="send-summary">
+              <p>Select a segment and generate content first.</p>
+            </div>
+            <div class="nudge-send-controls">
+              <input
+                type="text"
+                id="campaign-name"
+                placeholder="Campaign Name (optional)"
+                class="nudge-campaign-name-input"
+              />
+              <select id="approver-select" class="nudge-campaign-name-input" style="max-width: 200px;">
+                <option value="">Select Approver...</option>
+              </select>
+              <button
+                class="nudge-btn nudge-btn-send"
+                id="btn-request-approval"
+                disabled
+              >
+                📝 Request Approval
+              </button>
+            </div>
+          </div>
+
+          <!-- Send Result -->
+          <div class="nudge-send-result hidden" id="send-result"></div>
+
+          <!-- Delivery Log -->
+          <div class="nudge-delivery-log hidden" id="delivery-log-section">
+            <h4>Delivery Log (up to 50 recipients)</h4>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Location</th>
+                    <th>Platform</th>
+                    <th>Status</th>
+                    <th>Message</th>
+                  </tr>
+                </thead>
+                <tbody id="delivery-log-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Manager Approval Dashboard -->
+        <section class="nudge-history-section hidden" id="manager-approval-section">
+          <div class="nudge-section-head">
+            <h3>🛡️ Manager Approval Dashboard</h3>
+            <button class="nudge-btn nudge-btn-ghost" id="btn-refresh-approvals">
+              Refresh
+            </button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Agent</th>
+                  <th>Campaign Name</th>
+                  <th>Target Segment</th>
+                  <th>Platforms</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="approvals-tbody">
+                <tr>
+                  <td colspan="7" class="nudge-empty-state">
+                    Loading requests...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Campaign History / My Requests -->
+        <section class="nudge-history-section" id="history-section">
+          <div class="nudge-section-head">
+            <h3>📊 Campaign History</h3>
+            <button class="nudge-btn nudge-btn-ghost" id="btn-refresh-history">
+              Refresh
+            </button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Campaign</th>
+                  <th>Date</th>
+                  <th>Platforms</th>
+                  <th>Recipients</th>
+                  <th>Delivered</th>
+                  <th>Failed</th>
+                  <th>Rate</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="history-tbody">
+                <tr>
+                  <td colspan="7" class="nudge-empty-state">
+                    No campaigns sent yet
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/auth.js"></script>
+    <script src="/nudge-campaign.js"></script>
+  </body>
+</html>

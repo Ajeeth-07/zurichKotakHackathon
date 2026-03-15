@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Intelligence Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand-block">
+          <h1>Intelligence</h1>
+          <p>CROSS-SELL PLATFORM</p>
+        </div>
+
+        <nav class="side-nav">
+          <p class="nav-label">AGENT TOOLS</p>
+          <a class="active" href="/">Dashboard</a>
+          <a href="/customers">Customers</a>
+          <a href="/scanners">Scanners</a>
+          <a href="/nudge-campaigns">Nudge Campaigns</a>
+
+          <p class="nav-label push-top">CUSTOMER FACING</p>
+          <a href="#">Customer Portal</a>
+        </nav>
+
+        <div class="agent-card">
+          <div class="agent-avatar">AK</div>
+          <div>
+            <h3>Agent Portal</h3>
+            <p>Level 4 Elite</p>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-panel">
+        <section class="hero">
+          <h2>Welcome back, Agent</h2>
+          <p>Here is your cross-sell opportunity landscape today.</p>
+        </section>
+
+        <section class="metrics-grid">
+          <article class="metric-card">
+            <h4>Motor Customers</h4>
+            <strong id="motor-count">0</strong>
+          </article>
+
+          <article class="metric-card">
+            <h4>Health Customers</h4>
+            <strong id="health-count">0</strong>
+          </article>
+
+          <article class="metric-card">
+            <h4>Cross-Sell Opportunities</h4>
+            <strong id="cross-sell-count">0</strong>
+            <span>High intent</span>
+          </article>
+
+          <article class="metric-card">
+            <h4>Conversion Rate</h4>
+            <strong id="conversion-rate">0%</strong>
+            <span>Top 10% of agents</span>
+          </article>
+        </section>
+
+        <section class="visual-grid">
+          <article class="visual-card">
+            <div class="card-head">
+              <h3>Top Cross-Sell Products</h3>
+              <p>Products with highest conversion potential</p>
+            </div>
+            <canvas id="productsChart" aria-label="Top products chart"></canvas>
+          </article>
+
+          <article class="visual-card">
+            <div class="card-head">
+              <h3>Risk Distribution</h3>
+              <p>Portfolio exposure</p>
+            </div>
+            <canvas
+              id="riskChart"
+              aria-label="Risk distribution chart"
+            ></canvas>
+          </article>
+        </section>
+
+        <section class="cta-grid">
+          <a class="cta-card" href="/customers">
+            <h3>Explore Customers</h3>
+            <p>
+              Search and filter your strong customer base for cross-sell
+              targets.
+            </p>
+          </a>
+          <a class="cta-card muted" href="/scanners">
+            <h3>Interactive Scanners</h3>
+            <p>
+              Use Cyber, Health, and Pollution scanners to assess risk live.
+            </p>
+          </a>
+        </section>
+      </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/auth.js"></script>
+    <script src="/app.js"></script>
+  </body>
+</html>

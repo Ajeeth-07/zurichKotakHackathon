@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login — Intelligence Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(145deg, #0a1929 0%, #0f3057 40%, #194a76 100%);
+        font-family: 'Space Grotesk', sans-serif;
+      }
+
+      .login-container {
+        width: 100%;
+        max-width: 440px;
+        padding: 20px;
+      }
+
+      .login-card {
+        background: rgba(255, 255, 255, 0.97);
+        border-radius: 24px;
+        padding: 40px 36px;
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+        animation: fadeInUp 0.4s ease;
+      }
+
+      .login-brand {
+        text-align: center;
+        margin-bottom: 32px;
+      }
+
+      .login-brand h1 {
+        font-family: 'DM Serif Display', serif;
+        font-size: 28px;
+        color: #0a1929;
+        margin: 0;
+      }
+
+      .login-brand p {
+        color: #5f748a;
+        font-size: 13px;
+        letter-spacing: 2px;
+        margin: 4px 0 0;
+      }
+
+      .login-form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .login-field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .login-field label {
+        font-size: 13px;
+        font-weight: 600;
+        color: #344f67;
+      }
+
+      .login-field input {
+        border: 1px solid #d2dde8;
+        border-radius: 12px;
+        padding: 13px 16px;
+        font: inherit;
+        font-size: 15px;
+        transition: border-color 0.2s, box-shadow 0.2s;
+        background: #f8fbff;
+      }
+
+      .login-field input:focus {
+        outline: none;
+        border-color: #4a9cd6;
+        box-shadow: 0 0 0 3px rgba(74, 156, 214, 0.15);
+        background: #fff;
+      }
+
+      .login-submit {
+        background: linear-gradient(120deg, #0f56a5, #0c84c3);
+        color: #fff;
+        border: none;
+        border-radius: 14px;
+        padding: 14px;
+        font: inherit;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        margin-top: 8px;
+        transition: transform 0.2s, box-shadow 0.2s;
+        box-shadow: 0 8px 20px rgba(12, 110, 182, 0.3);
+      }
+
+      .login-submit:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 28px rgba(12, 110, 182, 0.4);
+      }
+
+      .login-submit:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .login-error {
+        background: #fef2f2;
+        color: #b91c1c;
+        border: 1px solid #fca5a5;
+        border-radius: 10px;
+        padding: 10px 14px;
+        font-size: 13px;
+        text-align: center;
+        display: none;
+      }
+
+      .login-credentials {
+        margin-top: 24px;
+        background: #f4f9ff;
+        border: 1px solid #d0e2f3;
+        border-radius: 14px;
+        padding: 16px;
+      }
+
+      .login-credentials h4 {
+        margin: 0 0 10px;
+        font-size: 14px;
+        color: #344f67;
+      }
+
+      .cred-table {
+        width: 100%;
+        font-size: 12px;
+        border-collapse: collapse;
+      }
+
+      .cred-table th {
+        text-align: left;
+        color: #5f748a;
+        font-weight: 600;
+        padding: 4px 8px;
+        border-bottom: 1px solid #e2edf7;
+      }
+
+      .cred-table td {
+        padding: 5px 8px;
+        color: #1a3a56;
+      }
+
+      .cred-table tr:nth-child(even) td {
+        background: #edf5fc;
+        border-radius: 4px;
+      }
+
+      .role-badge {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 6px;
+        font-size: 10px;
+        font-weight: 700;
+      }
+
+      .role-badge.agent {
+        background: #dbeafe;
+        color: #1e40af;
+      }
+
+      .role-badge.manager {
+        background: #fce7f3;
+        color: #9d174d;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="login-card">
+        <div class="login-brand">
+          <h1>Intelligence</h1>
+          <p>CROSS-SELL PLATFORM</p>
+        </div>
+
+        <form class="login-form" id="loginForm">
+          <div class="login-error" id="loginError"></div>
+
+          <div class="login-field">
+            <label for="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              placeholder="e.g. rahul.sharma"
+              autocomplete="username"
+              required
+            />
+          </div>
+
+          <div class="login-field">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Enter password"
+              autocomplete="current-password"
+              required
+            />
+          </div>
+
+          <button type="submit" class="login-submit" id="loginBtn">
+            Sign In
+          </button>
+        </form>
+
+        <div class="login-credentials">
+          <h4>🔑 Demo Credentials</h4>
+          <table class="cred-table">
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Role</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>rahul.sharma</td>
+                <td>agent123</td>
+                <td><span class="role-badge agent">Agent</span></td>
+              </tr>
+              <tr>
+                <td>priya.nair</td>
+                <td>agent123</td>
+                <td><span class="role-badge agent">Agent</span></td>
+              </tr>
+              <tr>
+                <td>anita.desai</td>
+                <td>manager123</td>
+                <td><span class="role-badge manager">Manager</span></td>
+              </tr>
+              <tr>
+                <td>sanjay.mehta</td>
+                <td>manager123</td>
+                <td><span class="role-badge manager">Manager</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // If already logged in, redirect
+      const existingToken = localStorage.getItem("authToken");
+      if (existingToken) {
+        fetch("/api/auth/me", {
+          headers: { Authorization: "Bearer " + existingToken },
+        })
+          .then((r) => (r.ok ? r.json() : null))
+          .then((user) => {
+            if (user) window.location.href = "/";
+          });
+      }
+
+      document.getElementById("loginForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const btn = document.getElementById("loginBtn");
+        const errEl = document.getElementById("loginError");
+        errEl.style.display = "none";
+        btn.disabled = true;
+        btn.textContent = "Signing in...";
+
+        try {
+          const res = await fetch("/api/auth/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              username: document.getElementById("username").value.trim(),
+              password: document.getElementById("password").value,
+            }),
+          });
+
+          const data = await res.json();
+
+          if (!res.ok) {
+            errEl.textContent = data.error || "Login failed.";
+            errEl.style.display = "block";
+            return;
+          }
+
+          localStorage.setItem("authToken", data.token);
+          localStorage.setItem("currentUser", JSON.stringify(data.user));
+          window.location.href = "/";
+        } catch (err) {
+          errEl.textContent = "Network error. Please try again.";
+          errEl.style.display = "block";
+        } finally {
+          btn.disabled = false;
+          btn.textContent = "Sign In";
+        }
+      });
+    </script>
+  </body>
+</html>

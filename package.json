@@ -1,0 +1,14 @@
+{
+  "name": "zurich-kotak-insights-clone",
+  "version": "1.0.0",
+  "description": "UI clone for Zurich Kotak Insights using demo_customers.js as data source",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "dotenv": "^16.4.7",
+    "express": "^4.19.2"
+  }
+}

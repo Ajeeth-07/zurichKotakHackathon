@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scanners | Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Primary navigation sidebar">
+        <div class="brand-block">
+          <h1>Intelligence</h1>
+          <p>CROSS-SELL PLATFORM</p>
+        </div>
+
+        <nav class="side-nav">
+          <p class="nav-label">AGENT TOOLS</p>
+          <a href="/">Dashboard</a>
+          <a href="/customers">Customers</a>
+          <a class="active" href="/scanners">Scanners</a>
+          <a href="/nudge-campaigns">Nudge Campaigns</a>
+        </nav>
+      </aside>
+
+      <main class="main-panel">
+        <section class="hero scanners-hero">
+          <h2>Risk Scanners</h2>
+          <p>
+            Use interactive tools to instantly visualize risk and pitch
+            contextual coverage.
+          </p>
+        </section>
+
+        <section class="scanner-tab-strip">
+          <button class="scanner-tab active" type="button" data-tab="cyber">
+            Cyber Risk
+          </button>
+          <button class="scanner-tab" type="button" data-tab="health">
+            Health Scan
+          </button>
+        </section>
+
+        <section class="scanner-layout">
+          <section class="scanner-panel" id="scannerPanel">
+            <div class="scanner-card-head">
+              <h3 id="scannerTitle">Cyber Risk Assessment</h3>
+              <p id="scannerDescription">
+                Check if your customer's data has been compromised to pitch
+                Cyber Insurance.
+              </p>
+            </div>
+
+            <form id="scannerForm" class="scanner-form">
+              <div id="scannerContactFields" class="scanner-contact-fields">
+                <label for="scannerEmail">Customer Email</label>
+                <input
+                  id="scannerEmail"
+                  name="email"
+                  type="email"
+                  placeholder="john.doe@example.com"
+                />
+
+                <label for="scannerPhone">Mobile Number</label>
+                <input
+                  id="scannerPhone"
+                  name="phone"
+                  type="text"
+                  placeholder="9876543210"
+                />
+              </div>
+
+              <button
+                id="scannerSubmitBtn"
+                type="submit"
+                class="scanner-submit"
+              >
+                <span
+                  id="scannerSpinner"
+                  class="spinner hidden"
+                  aria-hidden="true"
+                ></span>
+                <span id="scannerSubmitText">Run Deep Scan</span>
+              </button>
+              <p
+                id="scannerStatus"
+                class="scanner-status"
+                aria-live="polite"
+              ></p>
+            </form>
+
+            <section
+              id="healthCameraModule"
+              class="health-camera hidden"
+              aria-label="Health camera analyzer"
+            >
+              <h4>Health Scan Camera</h4>
+              <p>
+                Capture a quick face snapshot and run visual risk cues with
+                profile context.
+              </p>
+              <div class="camera-stage">
+                <video id="healthVideo" autoplay playsinline muted></video>
+                <canvas id="healthCanvas" class="hidden"></canvas>
+              </div>
+              <div class="camera-actions">
+                <button id="capturePhotoBtn" type="button" class="camera-btn">
+                  Capture Snapshot
+                </button>
+                <button
+                  id="retakePhotoBtn"
+                  type="button"
+                  class="camera-btn ghost hidden"
+                >
+                  Retake
+                </button>
+                <button
+                  id="healthAnalyzeBtn"
+                  type="button"
+                  class="camera-btn analyze"
+                >
+                  Analyze Risk
+                </button>
+                <span id="healthCaptureStatus" class="camera-status"
+                  >Camera will start when Health Scan tab is active.</span
+                >
+              </div>
+            </section>
+
+            <article id="scanResult" class="scan-result hidden">
+              <h4 id="resultHeadline">Scan Result</h4>
+              <p id="resultSummary"></p>
+              <ul id="resultSignals" class="reason-list"></ul>
+              <div class="result-actions">
+                <span id="resultScore" class="score-pill"></span>
+                <span id="resultPitch" class="score-pill"></span>
+              </div>
+            </article>
+          </section>
+
+          <aside class="scanner-side-panel" aria-label="Scanner insights panel">
+            <h4>Scanner Intelligence</h4>
+            <p id="scannerSideTitle">Active Tool: Cyber Risk</p>
+            <ul class="side-points">
+              <li>Fetches live signals and behavior indicators.</li>
+              <li>Generates actionable cross-sell context instantly.</li>
+              <li>Adapts recommendation pitch to scanner type.</li>
+            </ul>
+            <div class="mini-kpi">
+              <span>Scan Mode</span>
+              <strong id="scannerMode">Cyber</strong>
+            </div>
+            <div class="mini-kpi">
+              <span>Last Status</span>
+              <strong id="scannerLastStatus">Awaiting input</strong>
+            </div>
+          </aside>
+        </section>
+      </main>
+    </div>
+
+    <script src="/auth.js"></script>
+    <script src="/scanners.js"></script>
+  </body>
+</html>
