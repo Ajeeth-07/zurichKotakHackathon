@@ -31,23 +31,49 @@
 
       <main class="main-panel">
         <section class="hero scanners-hero">
-          <h2>Risk Scanners</h2>
+          <h2>Risk & Wellness Scanners</h2>
           <p>
-            Use interactive tools to instantly visualize risk and pitch
-            contextual coverage.
+            Interactive tools to visualize risk, assess wellness, and pitch
+            contextual coverage with Zurich Kotak products.
           </p>
         </section>
 
-        <section class="scanner-tab-strip">
+        <!-- Tab Strip (scrollable) -->
+        <section class="scanner-tab-strip scanner-tab-scroll">
           <button class="scanner-tab active" type="button" data-tab="cyber">
-            Cyber Risk
+            🛡️ Cyber Risk
           </button>
           <button class="scanner-tab" type="button" data-tab="health">
-            Health Scan
+            ❤️ Health Scan
+          </button>
+          <button class="scanner-tab" type="button" data-tab="mind">
+            🧠 Mind Wealth
+          </button>
+          <button class="scanner-tab" type="button" data-tab="emotional">
+            💪 Emotional Resilience
+          </button>
+          <button class="scanner-tab" type="button" data-tab="nutrition">
+            🍎 Nutrition Risk
+          </button>
+          <button class="scanner-tab" type="button" data-tab="metabolic">
+            ⚡ Metabolic Age
+          </button>
+          <button class="scanner-tab" type="button" data-tab="ergonomic">
+            🖥️ Ergonomic
+          </button>
+          <button class="scanner-tab" type="button" data-tab="nature">
+            🌿 Nature Deficit
+          </button>
+          <button class="scanner-tab" type="button" data-tab="circadian">
+            🌙 Circadian
+          </button>
+          <button class="scanner-tab" type="button" data-tab="lifesim">
+            🎮 Life Simulator
           </button>
         </section>
 
         <section class="scanner-layout">
+          <!-- ===== Original Cyber / Health scanner panel ===== -->
           <section class="scanner-panel" id="scannerPanel">
             <div class="scanner-card-head">
               <h3 id="scannerTitle">Cyber Risk Assessment</h3>
@@ -142,6 +168,119 @@
                 <span id="resultPitch" class="score-pill"></span>
               </div>
             </article>
+          </section>
+
+          <!-- ===== Quiz-based Wellness Scanner Panel ===== -->
+          <section class="scanner-panel hidden" id="quizPanel">
+            <div class="scanner-card-head">
+              <h3 id="quizTitle">Wellness Assessment</h3>
+              <p id="quizDescription">Answer 5 questions to get your score.</p>
+            </div>
+
+            <!-- Quiz Progress -->
+            <div class="quiz-progress-wrap" id="quizProgressWrap">
+              <div class="quiz-progress-bar">
+                <div class="quiz-progress-fill" id="quizProgressFill" style="width:20%"></div>
+              </div>
+              <span class="quiz-progress-label" id="quizProgressLabel">Question 1 of 5</span>
+            </div>
+
+            <!-- Quiz Question -->
+            <div class="quiz-question-area" id="quizQuestionArea">
+              <h4 class="quiz-question-text" id="quizQuestionText"></h4>
+              <div class="quiz-options" id="quizOptions"></div>
+              <div class="quiz-nav">
+                <button class="nudge-btn nudge-btn-ghost" id="quizPrevBtn" disabled>← Back</button>
+                <button class="nudge-btn nudge-btn-primary" id="quizNextBtn" disabled>Next →</button>
+              </div>
+            </div>
+
+            <!-- Quiz Results -->
+            <div class="quiz-results hidden" id="quizResults">
+              <div class="quiz-score-card" id="quizScoreCard">
+                <div class="quiz-score-circle" id="quizScoreCircle">
+                  <span class="quiz-score-value" id="quizScoreValue">0</span>
+                  <span class="quiz-score-label">/ 100</span>
+                </div>
+                <h3 id="quizScoreTitle">Your Score</h3>
+                <p id="quizScoreSummary"></p>
+              </div>
+
+              <div class="quiz-insights" id="quizInsights"></div>
+
+              <div class="quiz-policy-section">
+                <h4>🏥 Recommended Zurich Kotak Products</h4>
+                <div class="quiz-policy-cards" id="quizPolicyCards"></div>
+              </div>
+
+              <button class="nudge-btn nudge-btn-primary" id="quizRetakeBtn" style="margin-top:20px">
+                🔄 Retake Assessment
+              </button>
+            </div>
+          </section>
+
+          <!-- ===== Life Simulator Panel (General Insurance) ===== -->
+          <section class="scanner-panel hidden" id="lifeSimPanel">
+            <div class="scanner-card-head">
+              <h3>🎮 Insurance Gap Simulator</h3>
+              <p>Answer a few questions about your lifestyle — discover your insurance gaps and get personalised coverage recommendations.</p>
+            </div>
+
+            <div class="lifesim-stage" id="lifesimStage">
+              <!-- Step header -->
+              <div class="lifesim-step-header">
+                <span class="lifesim-step-label" id="lifesimStepLabel">Step 1/5</span>
+                <span class="lifesim-step-tag" id="lifesimStepTag">Profile</span>
+                <span class="lifesim-xp-badge" id="lifesimXpBadge">100 XP ●</span>
+              </div>
+
+              <!-- Dot progress -->
+              <div class="lifesim-dot-progress" id="lifesimDotProgress">
+                <span class="lifesim-dot active"></span>
+                <span class="lifesim-dot"></span>
+                <span class="lifesim-dot"></span>
+                <span class="lifesim-dot"></span>
+                <span class="lifesim-dot"></span>
+              </div>
+
+              <!-- Question area -->
+              <div class="lifesim-question-area" id="lifesimQuestionArea">
+                <h4 class="lifesim-headline" id="lifesimHeadline"></h4>
+                <p class="lifesim-subtext" id="lifesimSubtext"></p>
+                <div class="lifesim-answer-zone" id="lifesimAnswerZone"></div>
+              </div>
+
+              <!-- Sub-question (conditional) -->
+              <div class="lifesim-sub-question hidden" id="lifesimSubQ"></div>
+
+              <!-- Nudge quote -->
+              <div class="lifesim-nudge-quote" id="lifesimNudgeQuote"></div>
+
+              <!-- Navigation -->
+              <div class="lifesim-nav">
+                <button class="nudge-btn nudge-btn-ghost" id="lifesimBackBtn" disabled>Back</button>
+                <button class="nudge-btn nudge-btn-primary" id="lifesimContinueBtn" disabled>Continue</button>
+              </div>
+            </div>
+
+            <div class="lifesim-results hidden" id="lifesimResults">
+              <div class="quiz-score-card" id="lifesimScoreCard">
+                <div class="quiz-score-circle" id="lifesimScoreCircle">
+                  <span class="quiz-score-value" id="lifesimScoreValue">0</span>
+                  <span class="quiz-score-label">/ 100</span>
+                </div>
+                <h3>Insurance Gap Score</h3>
+                <p id="lifesimScoreSummary"></p>
+              </div>
+              <div class="quiz-insights" id="lifesimInsights"></div>
+              <div class="quiz-policy-section">
+                <h4>🛡️ Recommended Zurich Kotak General Insurance Products</h4>
+                <div class="quiz-policy-cards" id="lifesimPolicyCards"></div>
+              </div>
+              <button class="nudge-btn nudge-btn-primary" id="lifesimRetakeBtn" style="margin-top:20px">
+                🔄 Try Again
+              </button>
+            </div>
           </section>
 
           <aside class="scanner-side-panel" aria-label="Scanner insights panel">
