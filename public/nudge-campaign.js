@@ -306,14 +306,13 @@
     const results = $("#ai-results");
 
     placeholder.classList.add("hidden");
-    loading.classList.remove("hidden");
-    results.classList.add("hidden");
-
     try {
+      const customPrompt = $("#custom-ai-prompt")?.value.trim() || "";
+      
       const res = await fetch("/api/nudge/generate-content", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...currentFilters, platforms: readPlatforms() }),
+        body: JSON.stringify({ ...currentFilters, platforms: readPlatforms(), customPrompt }),
       });
 
       const data = await res.json();

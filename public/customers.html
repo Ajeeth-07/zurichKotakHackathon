@@ -26,6 +26,7 @@
           <a class="active" href="/customers">Customers</a>
           <a href="/scanners">Scanners</a>
           <a href="/nudge-campaigns">Nudge Campaigns</a>
+          <a href="/agent-performance">Agent Performance</a>
         </nav>
       </aside>
 
@@ -57,6 +58,22 @@
             <option value="Branch">Branch</option>
             <option value="App">App</option>
           </select>
+          <select id="customerSinceFilter">
+            <option value="">Customer Since</option>
+            <option value="lt2">Less than 2 years</option>
+            <option value="2to5">2 – 5 years</option>
+            <option value="5to7">5 – 7 years</option>
+            <option value="gt7">7+ years</option>
+          </select>
+          <select id="renewalDateFilter">
+            <option value="">Renewal In</option>
+            <option value="15">Next 15 days</option>
+            <option value="30">Next 30 days</option>
+            <option value="60">Next 60 days</option>
+            <option value="90">Next 90 days</option>
+            <option value="180">Next 6 months</option>
+            <option value="overdue">Overdue</option>
+          </select>
           <button id="applyFilterBtn" type="button">Apply</button>
         </section>
 
@@ -71,7 +88,8 @@
                 <th>Risk</th>
                 <th>Policies</th>
                 <th>Claims</th>
-                <th>Confidence Score</th>
+                <th>Customer Since</th>
+                <th>Next Renewal</th>
                 <th>Location</th>
               </tr>
             </thead>

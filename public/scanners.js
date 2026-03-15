@@ -3,8 +3,8 @@
 // ═══════════════════════════════════════════════════
 
 const SCANNER_MAP = {
-  cyber: { title:"Cyber Risk Assessment", description:"Check if your customer's data has been compromised to pitch Cyber Insurance.", pitch:"Cyber Insurance" },
-  health: { title:"Health Vulnerability Scan", description:"Evaluate wellness and medical indicators to position a health cover upgrade.", pitch:"Critical Illness Cover" },
+  cyber: { title:"Cyber Risk Assessment", description:"Check if your data has been compromised and discover the right cyber protection cover.", product:"Zurich Kotak Cyber Insurance" },
+  health: { title:"Health Vulnerability Scan", description:"Evaluate your wellness and medical indicators to find the ideal health coverage for you.", product:"Zurich Kotak Health Insurance" },
 };
 
 const ZURICH_PRODUCTS = {
@@ -878,10 +878,10 @@ function bindForm(){
       }
       await delay(350);
       $("#resultHeadline").textContent=`${scanMeta.title} Result`;
-      $("#resultSummary").textContent=`${scoreLabel} propensity identified for ${scanMeta.pitch} conversation.`;
+      $("#resultSummary").textContent=`${scoreLabel} risk level detected. We recommend exploring ${scanMeta.product} for comprehensive protection.`;
       $("#resultSignals").innerHTML=signals.map(s=>`<li>${s}</li>`).join("");
       $("#resultScore").textContent=`Scan Score: ${score}`;
-      $("#resultPitch").textContent=`Recommended Pitch: ${scanMeta.pitch}`;
+      $("#resultPitch").textContent=`Recommended: ${scanMeta.product}`;
       $("#scanResult").classList.remove("hidden");
       setStatus("Scan completed successfully.","success");
     }catch(err){ setStatus(err.message||"Scan failed.","error"); }

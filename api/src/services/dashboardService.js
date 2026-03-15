@@ -101,7 +101,7 @@ function getSummary() {
 }
 
 function getCustomers(query) {
-  const { q = "", risk = "", channel = "", page = "1", limit = "12" } = query;
+  const { q = "", risk = "", channel = "", customerSince = "", renewalDate = "", page = "1", limit = "12" } = query;
   const customers = getAllCustomers();
   const maxIncome = Math.max(
     ...customers.map((customer) => customer.annualIncome),
@@ -135,12 +135,62 @@ function getCustomers(query) {
     );
   }
 
+  // Customer Since filter (tenure buckets)
+  if (customerSince) {
+    const now = new Date();
+    filtered = filtered.filter((customer) => {
+      if (!customer.customerSince) return false;
+      const since = new Date(customer.customerSince);
+      const yearsAgo = (now - since) / (365.25 * 24 * 60 * 60 * 1000);
+      switch (customerSince) {
+        case "lt2": return yearsAgo < 2;
+        case "2to5": return yearsAgo >= 2 && yearsAgo < 5;
+        case "5to7": return yearsAgo >= 5 && yearsAgo < 7;
+        case "gt7": return yearsAgo >= 7;
+        default: return true;
+      }
+    });
+  }
+
+  // Renewal Date filter (upcoming renewal windows)
+  if (renewalDate) {
+    const now = new Date();
+    filtered = filtered.filter((customer) => {
+      const renewals = customer.policies
+        .map((p) => p.renewalDate)
+        .filter(Boolean)
+        .map((d) => new Date(d));
+      if (renewals.length === 0) return false;
+      const nearest = new Date(Math.min(...renewals));
+      const daysUntil = (nearest - now) / (24 * 60 * 60 * 1000);
+      switch (renewalDate) {
+        case "15": return daysUntil >= 0 && daysUntil <= 15;
+        case "30": return daysUntil >= 0 && daysUntil <= 30;
+        case "60": return daysUntil >= 0 && daysUntil <= 60;
+        case "90": return daysUntil >= 0 && daysUntil <= 90;
+        case "180": return daysUntil >= 0 && daysUntil <= 180;
+        case "overdue": return daysUntil < 0;
+        default: return true;
+      }
+    });
+  }
+
   const paged = paginate(filtered, page, limit);
 
   paged.data = paged.data.map((customer) => {
+    // Compute nearest renewal date
+    const renewals = customer.policies
+      .map((p) => p.renewalDate)
+      .filter(Boolean)
+      .map((d) => new Date(d));
+    const nearestRenewal = renewals.length > 0
+      ? new Date(Math.min(...renewals)).toISOString().split("T")[0]
+      : null;
+
     return {
       ...customer,
       confidenceScore: deriveConfidenceScore(customer, maxIncome),
+      nearestRenewal,
     };
   });
 

@@ -26,9 +26,7 @@
           <a href="/customers">Customers</a>
           <a href="/scanners">Scanners</a>
           <a class="active" href="/nudge-campaigns">Nudge Campaigns</a>
-
-          <p class="nav-label push-top">CUSTOMER FACING</p>
-          <a href="#">Customer Portal</a>
+          <a href="/agent-performance">Agent Performance</a>
         </nav>
 
         <div class="agent-card">
@@ -244,9 +242,18 @@
         <section class="nudge-ai-section" id="ai-section">
           <div class="nudge-section-head">
             <h3>✨ AI Content Studio</h3>
-            <button class="nudge-btn nudge-btn-accent" id="btn-generate-ai">
-              <span class="nudge-btn-icon">🤖</span> Generate with Gemini
-            </button>
+            <div style="display: flex; gap: 10px; align-items: center; justify-content: flex-end;">
+              <input 
+                type="text" 
+                id="custom-ai-prompt" 
+                placeholder="Add custom instructions (e.g., 'Make it funny')" 
+                class="nudge-campaign-name-input" 
+                style="margin: 0; min-width: 300px;"
+              />
+              <button class="nudge-btn nudge-btn-accent" id="btn-generate-ai">
+                <span class="nudge-btn-icon">🤖</span> Generate with Gemini
+              </button>
+            </div>
           </div>
 
           <div class="nudge-ai-placeholder" id="ai-placeholder">

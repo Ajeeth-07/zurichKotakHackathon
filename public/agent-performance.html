@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agent Performance Hub | Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+    <style>
+      /* ── Agent Performance Hub ────────────────────────── */
+      .ap-metrics-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 16px;
+        margin-bottom: 28px;
+      }
+      .ap-metric {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 20px;
+        text-align: center;
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+      .ap-metric:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      }
+      .ap-metric-icon {
+        font-size: 28px;
+        margin-bottom: 8px;
+      }
+      .ap-metric h4 {
+        margin: 0 0 4px;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--muted);
+        font-weight: 600;
+      }
+      .ap-metric strong {
+        font-size: 26px;
+        color: var(--ink);
+        display: block;
+        font-weight: 700;
+        line-height: 1.2;
+      }
+      .ap-metric .ap-metric-sub {
+        font-size: 11px;
+        color: var(--muted);
+        margin-top: 2px;
+      }
+
+      /* Charts grid */
+      .ap-charts-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-bottom: 28px;
+      }
+      .ap-chart-card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 24px;
+      }
+      .ap-chart-card h3 {
+        font-size: 16px;
+        margin: 0 0 4px;
+        color: var(--ink);
+      }
+      .ap-chart-card p {
+        font-size: 12px;
+        color: var(--muted);
+        margin: 0 0 16px;
+      }
+
+      /* Full width chart */
+      .ap-chart-full {
+        grid-column: 1 / -1;
+      }
+
+      /* Leaderboard section */
+      .ap-leaderboard {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 24px;
+        margin-bottom: 28px;
+      }
+      .ap-leaderboard-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+      }
+      .ap-leaderboard-header h3 {
+        font-size: 18px;
+        margin: 0;
+      }
+      .ap-leaderboard-header p {
+        font-size: 13px;
+        color: var(--muted);
+        margin: 0;
+      }
+      .ap-filter-row {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .ap-filter-select {
+        padding: 8px 14px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: var(--panel);
+        font: inherit;
+        font-size: 13px;
+        color: var(--ink);
+        cursor: pointer;
+      }
+
+      /* Leaderboard table */
+      .ap-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      .ap-table th {
+        text-align: left;
+        padding: 10px 12px;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        color: var(--muted);
+        border-bottom: 2px solid var(--line);
+        font-weight: 600;
+      }
+      .ap-table td {
+        padding: 12px;
+        border-bottom: 1px solid var(--line);
+        vertical-align: middle;
+      }
+      .ap-table tbody tr {
+        transition: background 0.15s;
+      }
+      .ap-table tbody tr:hover {
+        background: var(--accent-soft);
+      }
+
+      /* Rank cell */
+      .ap-rank {
+        font-weight: 700;
+        font-size: 15px;
+        color: var(--ink);
+        width: 40px;
+      }
+      .ap-rank.gold { color: #f59e0b; }
+      .ap-rank.silver { color: #94a3b8; }
+      .ap-rank.bronze { color: #d97706; }
+
+      /* Agent cell */
+      .ap-agent-cell {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .ap-agent-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 700;
+        color: #fff;
+        flex-shrink: 0;
+      }
+      .ap-agent-avatar.elite { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
+      .ap-agent-avatar.gold { background: linear-gradient(135deg, #f59e0b, #fbbf24); }
+      .ap-agent-avatar.silver { background: linear-gradient(135deg, #64748b, #94a3b8); }
+      .ap-agent-avatar.bronze { background: linear-gradient(135deg, #d97706, #f59e0b); }
+      .ap-agent-name {
+        font-weight: 600;
+        color: var(--ink);
+      }
+      .ap-agent-region {
+        font-size: 11px;
+        color: var(--muted);
+      }
+
+      /* Tier badge */
+      .ap-tier-badge {
+        display: inline-block;
+        padding: 3px 10px;
+        border-radius: 8px;
+        font-size: 11px;
+        font-weight: 700;
+      }
+      .ap-tier-badge.elite { background: rgba(99,102,241,0.12); color: #6366f1; }
+      .ap-tier-badge.gold { background: rgba(245,158,11,0.12); color: #d97706; }
+      .ap-tier-badge.silver { background: rgba(100,116,139,0.12); color: #64748b; }
+      .ap-tier-badge.bronze { background: rgba(217,119,6,0.12); color: #92400e; }
+
+      /* Revenue bar */
+      .ap-revenue-bar-wrap {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .ap-revenue-bar {
+        flex: 1;
+        height: 8px;
+        background: var(--accent-soft);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .ap-revenue-fill {
+        height: 100%;
+        border-radius: 8px;
+        background: linear-gradient(90deg, #006db3, #00b4d8);
+        transition: width 0.6s ease;
+      }
+      .ap-revenue-val {
+        font-weight: 600;
+        font-size: 13px;
+        white-space: nowrap;
+        min-width: 78px;
+        text-align: right;
+      }
+
+      /* NPS pill */
+      .ap-nps {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 3px 10px;
+        border-radius: 8px;
+        font-size: 12px;
+        font-weight: 700;
+      }
+      .ap-nps.high { background: rgba(52,211,153,0.12); color: #059669; }
+      .ap-nps.mid { background: rgba(245,158,11,0.12); color: #d97706; }
+      .ap-nps.low { background: rgba(239,68,68,0.12); color: #dc2626; }
+
+      /* Top performers cards */
+      .ap-top-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+        margin-bottom: 28px;
+      }
+      .ap-top-card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 20px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+      .ap-top-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      }
+      .ap-top-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 4px;
+      }
+      .ap-top-card:nth-child(1)::before { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+      .ap-top-card:nth-child(2)::before { background: linear-gradient(90deg, #94a3b8, #cbd5e1); }
+      .ap-top-card:nth-child(3)::before { background: linear-gradient(90deg, #d97706, #f59e0b); }
+      .ap-top-card:nth-child(4)::before { background: linear-gradient(90deg, #6366f1, #8b5cf6); }
+      .ap-top-card:nth-child(5)::before { background: linear-gradient(90deg, #006db3, #00b4d8); }
+      .ap-top-medal {
+        font-size: 32px;
+        margin-bottom: 8px;
+        display: block;
+      }
+      .ap-top-name {
+        font-weight: 700;
+        font-size: 15px;
+        margin-bottom: 2px;
+      }
+      .ap-top-region {
+        font-size: 12px;
+        color: var(--muted);
+        margin-bottom: 10px;
+      }
+      .ap-top-stats {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .ap-top-stats strong {
+        color: var(--ink);
+        display: block;
+        font-size: 16px;
+      }
+
+      @media (max-width: 768px) {
+        .ap-charts-grid { grid-template-columns: 1fr; }
+        .ap-metrics-grid { grid-template-columns: repeat(2, 1fr); }
+        .ap-top-row { grid-template-columns: 1fr 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Primary navigation sidebar">
+        <div class="brand-block">
+          <h1>Intelligence</h1>
+          <p>CROSS-SELL PLATFORM</p>
+        </div>
+
+        <nav class="side-nav">
+          <p class="nav-label">AGENT TOOLS</p>
+          <a href="/">Dashboard</a>
+          <a href="/customers">Customers</a>
+          <a href="/scanners">Scanners</a>
+          <a href="/nudge-campaigns">Nudge Campaigns</a>
+          <a class="active" href="/agent-performance">Agent Performance</a>
+        </nav>
+
+        <div class="agent-card">
+          <div class="agent-avatar">AK</div>
+          <div>
+            <h3>Agent Portal</h3>
+            <p>Level 4 Elite</p>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-panel">
+        <section class="hero">
+          <h2>Agent Performance Hub</h2>
+          <p>Track team-wide performance, campaign effectiveness, and revenue metrics across all agents.</p>
+        </section>
+
+        <!-- Summary KPIs -->
+        <section class="ap-metrics-grid" id="metricsGrid"></section>
+
+        <!-- Top Performers Podium -->
+        <section>
+          <h3 style="margin:0 0 16px;font-size:18px">🏆 Top Performers</h3>
+          <div class="ap-top-row" id="topPerformers"></div>
+        </section>
+
+        <!-- Charts -->
+        <section class="ap-charts-grid">
+          <div class="ap-chart-card ap-chart-full">
+            <h3>Revenue & Conversions Trend</h3>
+            <p>Monthly performance over the last 6 months</p>
+            <canvas id="trendChart" aria-label="Revenue trend chart" height="80"></canvas>
+          </div>
+          <div class="ap-chart-card">
+            <h3>Revenue by Region</h3>
+            <p>Geographic distribution of revenue</p>
+            <canvas id="regionChart" aria-label="Region revenue chart"></canvas>
+          </div>
+          <div class="ap-chart-card">
+            <h3>Agent Tier Distribution</h3>
+            <p>Team composition by performance tier</p>
+            <canvas id="tierChart" aria-label="Agent tier chart"></canvas>
+          </div>
+        </section>
+
+        <!-- Leaderboard -->
+        <section class="ap-leaderboard">
+          <div class="ap-leaderboard-header">
+            <div>
+              <h3>📊 Full Agent Leaderboard</h3>
+              <p>Ranked by revenue generated</p>
+            </div>
+            <div class="ap-filter-row">
+              <select class="ap-filter-select" id="regionFilter">
+                <option value="">All Regions</option>
+              </select>
+              <select class="ap-filter-select" id="tierFilter">
+                <option value="">All Tiers</option>
+                <option value="4">Elite</option>
+                <option value="3">Gold</option>
+                <option value="2">Silver</option>
+                <option value="1">Bronze</option>
+              </select>
+            </div>
+          </div>
+          <div style="overflow-x:auto">
+            <table class="ap-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Agent</th>
+                  <th>Tier</th>
+                  <th>Campaigns</th>
+                  <th>Messages</th>
+                  <th>Conversions</th>
+                  <th>Motor Conv.</th>
+                  <th>Health Conv.</th>
+                  <th>Revenue</th>
+                  <th>Policies Sold</th>
+                  <th>Renewal %</th>
+                  <th>NPS</th>
+                </tr>
+              </thead>
+              <tbody id="leaderboardBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/auth.js"></script>
+    <script src="/agent-performance.js"></script>
+  </body>
+</html>

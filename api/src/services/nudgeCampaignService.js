@@ -345,7 +345,9 @@ async function generateCampaignContent(filters = {}, customPrompt = "") {
     );
 
     const smsPrompt = `You are a marketing copywriter for Zurich Kotak General Insurance (India).
-Generate personalized nudge messages for cross-sell and upsell insurance campaigns.
+Generate personalized nudge messages for cross-sell and upsell GENERAL insurance campaigns.
+
+CRITICAL: Zurich Kotak is a GENERAL insurance company ONLY. NEVER mention or suggest life insurance, term insurance, endowment, ULIP, pension, or annuity products. Only recommend products from: Health Insurance, Motor Insurance, Travel Insurance, Home Insurance, Personal Accident, Critical Illness Cover.
 
 SEGMENT PROFILE:
 ${segmentDescription}
@@ -361,6 +363,7 @@ RULES:
 - Mention specific product recommendations where relevant
 - Factor in customer age group, income level, existing policies, and renewal timing
 - Create messages that feel personal, not mass-marketed
+- CRITICAL: Add a call-to-action link to the Customer Portal scanners (e.g., "Try our Insurance Gap Simulator: https://zurichkotak.com/customer-portal") so customers can self-assess their risks and wellness.
 ${filters.platforms && filters.platforms.length ? `- Optimize message format for: ${filters.platforms.join(', ')}` : ''}
 
 Generate exactly 3 different message templates for this segment. For each template, provide:
@@ -468,7 +471,7 @@ function generateFallbackContent(sampleCustomers, segmentSummary) {
     templates.push({
       templateName: "Young Professional Shield",
       smsText:
-        "Hi {{name}}, safeguard your future with our Health 360 plan. Comprehensive coverage starting at ₹499/mo. Reply YES to know more!",
+        "Hi {{name}}, safeguard your future with our Health 360 plan starting at ₹499/mo. Assess your risk: https://zurichkotak.com/customer-portal",
       targetAudience: "Young professionals under 35",
       campaignType: "cross-sell",
     });
@@ -476,7 +479,7 @@ function generateFallbackContent(sampleCustomers, segmentSummary) {
     templates.push({
       templateName: "Family Protection",
       smsText:
-        "Dear {{name}}, your family deserves the best protection. Upgrade to our Comprehensive Family Shield today. Call 1800-XXX-XXXX!",
+        "Dear {{name}}, protect your family with our Comprehensive Family Shield. Calculate your insurance gap: https://zurichkotak.com/customer-portal",
       targetAudience: "Middle-aged family customers",
       campaignType: "upsell",
     });
@@ -484,7 +487,7 @@ function generateFallbackContent(sampleCustomers, segmentSummary) {
     templates.push({
       templateName: "Senior Care Plus",
       smsText:
-        "Hi {{name}}, enjoy enhanced health coverage with our Health Super Top plan. Special senior benefits included. Reply KNOW MORE!",
+        "Hi {{name}}, enjoy health coverage with our Super Top-up. Try our wellness scanner today: https://zurichkotak.com/customer-portal",
       targetAudience: "Senior customers 50+",
       campaignType: "upsell",
     });
@@ -494,14 +497,14 @@ function generateFallbackContent(sampleCustomers, segmentSummary) {
     {
       templateName: "Value Upgrade",
       smsText:
-        "Hi {{name}}, you qualify for a premium upgrade! Get 2x coverage at just 20% more. Limited period offer. Visit zurichkotak.com/upgrade",
+        "Hi {{name}}, you qualify to get 2x coverage at just 20% more. Check your insurance gap score here: https://zurichkotak.com/customer-portal",
       targetAudience: "High cross-sell score customers",
       campaignType: "upsell",
     },
     {
       templateName: "Protection Gap Alert",
       smsText:
-        "Dear {{name}}, our analysis shows a gap in your protection. Add Critical Illness Cover for complete peace of mind. Call us!",
+        "Dear {{name}}, our analysis shows a gap in your protection. Take the 1-min risk assessment: https://zurichkotak.com/customer-portal",
       targetAudience: "Customers with single policy",
       campaignType: "cross-sell",
     },

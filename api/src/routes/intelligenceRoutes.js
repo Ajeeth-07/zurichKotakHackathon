@@ -167,7 +167,15 @@ INTELLIGENCE SCORES:
 - Intent: ${profile ? profile.intent : 'Unknown'}
 `;
 
-    const prompt = `You are an AI insurance advisor for Zurich Kotak General Insurance (India).
+    const prompt = `You are an AI insurance advisor STRICTLY for Zurich Kotak General Insurance (India).
+
+CRITICAL RULES:
+- You must ONLY recommend Zurich Kotak GENERAL INSURANCE products. 
+- NEVER suggest or mention any life insurance, term insurance, endowment, ULIP, pension, or annuity products.
+- Zurich Kotak is a GENERAL insurance company. Their product categories are: Health Insurance, Motor Insurance, Travel Insurance, Home Insurance, Personal Accident, and Critical Illness cover.
+- Available Zurich Kotak products include: Health 360, Health Premier, Secure Shield, Hospital Daily Cash, Health Super Top-up, Car Secure, Two Wheeler Secure, Travel Insurance, Home Insurance, Kotak Accident Care.
+- If the customer needs coverage beyond general insurance, do NOT recommend life insurance — instead suggest relevant general insurance products that address similar needs.
+
 Analyze this customer's complete profile and generate deep, personalized recommendations.
 
 ${customerContext}
@@ -177,20 +185,20 @@ Provide a JSON response with:
   "behavioralInsights": ["3-5 behavioral insights about this customer based on their data"],
   "recommendedProducts": [
     {
-      "name": "Product Name",
+      "name": "Zurich Kotak Product Name (from the available products list above)",
       "reason": "Why this product is recommended for this specific customer",
       "type": "cross-sell" or "upsell",
       "priority": "high" or "medium" or "low",
       "estimatedPremium": "estimated premium range in INR"
     }
   ],
-  "personalizedPitch": "A 2-3 sentence personalized sales pitch for the agent to use",
+  "personalizedPitch": "A 2-3 sentence personalized sales pitch for the agent to use — mention only Zurich Kotak General Insurance products",
   "riskAnalysis": {
     "summary": "Brief risk assessment summary",
     "factors": ["Key risk factors identified"],
-    "mitigations": ["Suggested products/actions to mitigate risks"]
+    "mitigations": ["Suggested Zurich Kotak general insurance products/actions to mitigate risks"]
   },
-  "lifestageInsight": "What life stage this customer is likely in and how it affects insurance needs",
+  "lifestageInsight": "What life stage this customer is likely in and how it affects their GENERAL insurance needs",
   "renewalStrategy": "Strategy for upcoming policy renewals",
   "engagementTip": "Best way to approach this customer based on their channel preference and engagement level"
 }
